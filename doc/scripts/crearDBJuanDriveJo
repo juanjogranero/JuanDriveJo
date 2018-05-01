@@ -1,0 +1,25 @@
+create database if not exists DBJuanDriveJo;
+use DBJuanDriveJo;
+
+create table if not exists Usuarios(
+codUsuario integer primary key AUTO_INCREMENT,
+nombreUsuario varchar(50),
+passwordUsuario varchar(255),
+emailUsuario varchar(100),
+tamanioOcupadoUsuario INTEGER,
+tamanioPermitidoUsuario INTEGER,
+perfilUsuario varchar(50),
+navegadorUtilizado varchar(50),
+bloqueoUsuario INTEGER,
+imagenPerfilUsuario varchar(50),
+ultimaConexionUsuario DATE)engine=innodb;
+
+create table if not exists Ficheros(
+codFichero INTEGER primary key AUTO_INCREMENT,
+nombreFichero varchar(100),
+tipoDeArchivo varchar(100),
+tamanioFichero INTEGER,
+compartidoConFichero varchar(100),
+puntuacionFichero INTEGER ,
+fechaSubidaFichero DATE,
+usuarioPropietarioFichero varchar(255))engine=innodb;
