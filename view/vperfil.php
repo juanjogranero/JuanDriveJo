@@ -86,13 +86,21 @@
                 <div class="input-group">
                     <label class="input-group-btn">
                     <span class="btn btn-primary">
-                            Seleccionar <input type="file" style="display: none;" name="imagenPerfilUsuario" id="imagenPerfilUsuario">
+                            Seleccionar <input type="file" style="display: none;" name="imagenPerfilUsuario" id="imagenPerfilUsuario" size="512" onchange="return fileValidation()">
                     </span>
                     </label>
-
                     <input type="text" class="form-control" readonly>
                 </div>
+                <div id="imagePreview" class="text-center"></div>
+                <?php if ($mensajeError['errorArchivo'] != "") {
+                    echo "<div class=\"alert alert-danger\">" . $mensajeError['errorArchivo'] . "</div></br>";
+                } ?>
+                <?php if ($mensajeError['errorSubida'] != "") {
+                    echo "<div class=\"alert alert-danger\">" . $mensajeError['errorSubida'] . "</div></br>";
+                } ?>
                 <hr>
+
+
 
                 <div class="form-group text-center">
                     <input type="submit" class="btn btn-success" name="Aceptar" value="Modificar mis datos">
@@ -172,4 +180,31 @@
         });
 
     });
+
+    function fileValidation(){
+        var fileSize = $('#imagenPerfilUsuario')[0].files[0].size;
+        var siezekiloByte = parseInt(fileSize / 1024);
+        var fileInput = document.getElementById('imagenPerfilUsuario');
+        var filePath = fileInput.value;
+        var allowedExtensions = /(.jpg)$/i;
+        if (siezekiloByte >  $('#imagenPerfilUsuario').attr('size')) {
+            alert("La imagen no puede superar los 512Kb");
+            fileInput.value = '';
+            return false;
+        }
+        if(!allowedExtensions.exec(filePath)){
+            alert('Por favor,introduzca un fichero de tipo imagen con el formato .jpg');
+            fileInput.value = '';
+            return false;
+        }else{
+            //Image preview
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'" alt=\'nueva foto de perfil\' class=\'img-circle\' style=\'width:150px;height:150px ;margin-top:5%;box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.3);\'/>';
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    }
 </script>

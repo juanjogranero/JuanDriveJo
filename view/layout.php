@@ -6,8 +6,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <?php
+    //Si se van a mostrar graficos, se cargan estas librerias de JS
+    if (isset($_GET["pagina"]) && $_GET["pagina"] == "perfil") {
+        echo '
+            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+        ';
+    }
+
+    //Si se van a subir archivos a la pagina principal, se cargan los scripts de la dropzone
+    if (isset($_GET["pagina"]) && $_GET["pagina"] == "inicio") {
+        echo '
+            <link href="/webroot/css/dropzone.min.css" type="text/css" rel="stylesheet" />
+            <script src="/webroot/js/dropzone.min.js"></script>
+        ';
+    }
+    ?>
 
     <link rel="stylesheet" href="webroot/css/style.css" type="text/css">
 

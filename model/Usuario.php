@@ -61,10 +61,6 @@ class Usuario
      * @var string $imagenPerfil imagen de perfil del usuario.
      */
     private $imagenPerfil;
-    /**
-     * @var string $ultimaConexion Ultima conexion del usuario.
-     */
-    private $ultimaConexion;
 
     /**
      * Usuario constructor.
@@ -78,9 +74,8 @@ class Usuario
      * @param string $navegadorUtilizado
      * @param int $bloqueo
      * @param string $imagenPerfil
-     * @param string $ultimaConexion
      */
-    public function __construct($codUsuario, $nombreUsuario, $passwordUsuario, $email, $tamanioOcupado, $tamanioPermitido, $perfil, $navegadorUtilizado, $bloqueo, $imagenPerfil, $ultimaConexion)
+    public function __construct($codUsuario, $nombreUsuario, $passwordUsuario, $email, $tamanioOcupado, $tamanioPermitido, $perfil, $navegadorUtilizado, $bloqueo, $imagenPerfil)
     {
         $this->codUsuario = $codUsuario;
         $this->nombreUsuario = $nombreUsuario;
@@ -92,7 +87,6 @@ class Usuario
         $this->navegadorUtilizado = $navegadorUtilizado;
         $this->bloqueo = $bloqueo;
         $this->imagenPerfil = $imagenPerfil;
-        $this->ultimaConexion = $ultimaConexion;
     }
 
 
@@ -113,7 +107,7 @@ class Usuario
         $usuario = null;
         $arrayUsuario = UsuarioPDO::validarUsuario($nombreUsuario, $passwordUsuario);
         if (!empty($arrayUsuario)) {
-            $usuario = new Usuario($arrayUsuario['codUsuario'], $nombreUsuario, $passwordUsuario, $arrayUsuario['emailUsuario'], $arrayUsuario['tamanioOcupadoUsuario'], $arrayUsuario['tamanioPermitidoUsuario'], $arrayUsuario['perfilUsuario'], $arrayUsuario['navegadorUtilizado'], $arrayUsuario['bloqueoUsuario'], $arrayUsuario['imagenPerfilUsuario'], $arrayUsuario['ultimaConexionUsuario']);
+            $usuario = new Usuario($arrayUsuario['codUsuario'], $nombreUsuario, $passwordUsuario, $arrayUsuario['emailUsuario'], $arrayUsuario['tamanioOcupadoUsuario'], $arrayUsuario['tamanioPermitidoUsuario'], $arrayUsuario['perfilUsuario'], $arrayUsuario['navegadorUtilizado'], $arrayUsuario['bloqueoUsuario'], $arrayUsuario['imagenPerfilUsuario']);
         }
         return $usuario;
     }
@@ -149,13 +143,15 @@ class Usuario
      * @param string $password Contraseña del usuario.
      * @return bool         Boolean que dice si la consulta se ha ejecutado bien o no.
      */
-    public function editarUsuario($descripcion, $password)
+    public function editarUsuario($email, $password,$imagenPerfil)
     {
         $codUsuario = $this->getCodUsuario();
-        if (empty($password)) {
-            $password = hash('sha256', $this->getPassword());
+        if(UsuarioPDO::editarUsuario($codUsuario,$email, $password,$imagenPerfil)){
+            $this->setEmail($email);
+            $this->setPasswordUsuario($password);
+            $this->setImagenPerfil($imagenPerfil);
         }
-        return UsuarioPDO::editarUsuario($codUsuario, $descripcion, $password);
+        return false;
     }
 
 
@@ -347,24 +343,6 @@ class Usuario
     {
         $this->imagenPerfil = $imagenPerfil;
     }
-
-    /**
-     * @return string
-     */
-    public function getUltimaConexion()
-    {
-        return $this->ultimaConexion;
-    }
-
-    /**
-     * @param string $ultimaConexion
-     */
-    public function setUltimaConexion($ultimaConexion)
-    {
-        $this->ultimaConexion = $ultimaConexion;
-    }
-
-
 
 }
 

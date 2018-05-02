@@ -11,8 +11,7 @@ tamanioPermitidoUsuario INTEGER,
 perfilUsuario varchar(50),
 navegadorUtilizado varchar(50),
 bloqueoUsuario INTEGER,
-imagenPerfilUsuario varchar(50),
-ultimaConexionUsuario DATE)engine=innodb;
+imagenPerfilUsuario varchar(50))engine=innodb;
 
 create table if not exists Ficheros(
 codFichero INTEGER primary key AUTO_INCREMENT,

@@ -2,8 +2,8 @@
 //Definicion constantes con las rutas referentes al servidor
 define('PATHSERVIDOR','http://192.168.1.5/');
 define('PATHIMAGENES','webroot/media/img/');
-define('PATHIMAGENESPERFIL','webroot/media/img/perfilUsuario');
-
+define('PATHIMAGENESPERFIL','webroot/media/img/perfilUsuario/');
+define('PATHDIRECTORIOFICHEROSUSUARIOS','webroot/media/files/');
 //Vistas disponibles
 $vistas=[
     'inicio'=>'view/vinicio.php',

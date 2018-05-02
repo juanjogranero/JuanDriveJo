@@ -3,7 +3,7 @@ require_once 'model/Usuario.php';
 require_once 'config/DBconfig.php';
 require_once 'core/LibreriaValidacion.php';
 require_once 'config/configuracion.php';
-
+require_once 'core/libreriaArchivos.php';
 session_start();//Se inicia la sesion o si existe se recupera
 
 if (isset($_SESSION['usuario'])) {

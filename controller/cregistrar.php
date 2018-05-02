@@ -53,19 +53,26 @@ if (isset($_POST['Aceptar']) && $entradaOK) {
     else
         $navegadorUtilizado = 'No hemos podido detectar su navegador';
     //Se guardan los datos del usuario en variables.
-    $nombreUsuario = $_POST['nombreUsuario'];
+    $nombreUsuario = trim($_POST['nombreUsuario']);
     $password = hash('sha256', $_POST['passwordUsuario']);
     //Se llama al metodo que lo inserta en la base de datos.
-    $usuario = Usuario::registrarUsuario($nombreUsuario, $password , $_POST['emailUsuario'], $navegadorUtilizado);
+    $usuario = Usuario::registrarUsuario($nombreUsuario, $password, $_POST['emailUsuario'], $navegadorUtilizado);
     //Si el usuario es null es porque ha habido errores.
     if (is_null($usuario)) {
         header("Location: index.php?pagina=registrar");
         //Si no es null es que se ha insertado, se guarda en la sesión y se redirige al index
     } else {
+
+        //Creamos la carpeta donde se guardaran los archivos para el usuario
+        mkdir(PATHDIRECTORIOFICHEROSUSUARIOS . $usuario->getCodUsuario() . '/archivos', 0777, true);
+        //Damos permisos a esas carpetas
+        chmod(PATHDIRECTORIOFICHEROSUSUARIOS . $usuario->getCodUsuario(), 0777);
+        chmod(PATHDIRECTORIOFICHEROSUSUARIOS . $usuario->getCodUsuario() . '/archivos', 0777);
         $_SESSION['usuario'] = $usuario;
         header("Location: index.php");
+
     }
-}else {//Si no se muestra el layout.
+} else {//Si no se muestra el layout.
     $_GET['pagina'] = "registrar";
     require_once 'view/layout.php';
 }

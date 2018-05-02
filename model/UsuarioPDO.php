@@ -42,7 +42,6 @@ class UsuarioPDO implements UsuarioDB {
                 $arrayUsuario['navegadorUtilizado'] = $resultadoFetch->navegadorUtilizado;
                 $arrayUsuario['bloqueoUsuario'] = $resultadoFetch->bloqueoUsuario;
                 $arrayUsuario['imagenPerfilUsuario'] = $resultadoFetch->imagenPerfilUsuario;
-                $arrayUsuario['ultimaConexionUsuario'] = strtotime("$resultadoFetch->ultimaConexionUsuario");
             }
             return $arrayUsuario;
         }
@@ -60,9 +59,8 @@ class UsuarioPDO implements UsuarioDB {
          */
         public static function registrarUsuario($nombreUsuario,$passwordUsuario , $email,$navegadorUtilizado){
             $registroOK=false;
-            $lastupdated = date('Y-m-d H:i:s');
-            $sql = "Insert into Usuarios (nombreUsuario,passwordUsuario,emailUsuario,tamanioOcupadoUsuario,tamanioPermitidoUsuario,perfilUsuario,navegadorUtilizado,bloqueoUsuario,imagenPerfilUsuario,ultimaConexionUsuario) values (?,?,?,0,150,'usuario',?,0,'webroot/media/img/perfil/default.jpg',?) ";
-            $resultado= DBPDO::ejecutaConsulta($sql,[$nombreUsuario,$passwordUsuario,$email,$navegadorUtilizado,$lastupdated]);
+            $sql = "Insert into Usuarios (nombreUsuario,passwordUsuario,emailUsuario,tamanioOcupadoUsuario,tamanioPermitidoUsuario,perfilUsuario,navegadorUtilizado,bloqueoUsuario,imagenPerfilUsuario) values (?,?,?,0,150,'usuario',?,0,'webroot/media/img/perfil/default.jpg') ";
+            $resultado= DBPDO::ejecutaConsulta($sql,[$nombreUsuario,$passwordUsuario,$email,$navegadorUtilizado]);
             if ($resultado->rowCount()==1){
                 $registroOK = true;
             }
@@ -80,35 +78,16 @@ class UsuarioPDO implements UsuarioDB {
          * @param string    $password     Contraseña del usuario.
          * @return bool         Boolean que controla que se ha ejecutado bien
          */
-        public static function editarUsuario($nombreUsuario, $descripcion, $password){
+        public static function editarUsuario($codUsuario,$email, $password,$imagenPerfil){
             $modificacionOK=false;
-            $sql = "Update Usuarios SET descUsuario=?,password=? where codUsuario=?";
-            $resultado= DBPDO::ejecutaConsulta($sql,[$descripcion,$password,$nombreUsuario]);
-            if ($resultado->rowCount()==1){
-                $modificacionOK = 'Modificacion OK';
-            }
-            return $modificacionOK;
-        }
-
-        /**
-         * Funcion para editar un usario sin cambiar contraseña.
-         *
-         * Funcion a la que se le pasan como parametros el codigo del usuarioy la descripcion
-         * se llama al metodo ejecutaConsulta y la realiza.
-         *
-         * @param string    $nombreUsuario   Codigo del usuario.
-         * @param string    $descripcion  Descripcion del usuario.
-         * @return bool         Boolean que controla que se ha ejecutado bien.
-         */
-        public static function editarUsuarioDesc($nombreUsuario, $descripcion){
-            $modificacionOK=false;
-            $sql = "Update Usuarios SET descUsuario=? where codUsuario=?";
-            $resultado= DBPDO::ejecutaConsulta($sql,[$descripcion,$nombreUsuario]);
+            $sql = "Update Usuarios SET emailUsuario=?,passwordUsuario=?,imagenPerfilUsuario=? where codUsuario=?";
+            $resultado= DBPDO::ejecutaConsulta($sql,[$email, $password,$imagenPerfil,$codUsuario]);
             if ($resultado->rowCount()==1){
                 $modificacionOK = true;
             }
             return $modificacionOK;
         }
+
 
         /**
          * Funcion para editar un usuario.
