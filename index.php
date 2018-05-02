@@ -5,6 +5,7 @@ require_once 'core/LibreriaValidacion.php';
 require_once 'config/configuracion.php';
 require_once 'core/libreriaArchivos.php';
 session_start();//Se inicia la sesion o si existe se recupera
+setcookie("rutaSubidaArchivos", PATHAPACHE.PATHDIRECTORIOFICHEROSUSUARIOS.$_SESSION["usuario"]->getCodUsuario()."/archivos", time() + (86400 * 30), "/");
 
 if (isset($_SESSION['usuario'])) {
     if ($_SESSION['usuario']->getBloqueo()) {
