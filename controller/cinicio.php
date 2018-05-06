@@ -13,8 +13,10 @@ if (!isset($_SESSION['usuario'])) {
         $_GET["pagina"] = "inicio";
         include_once 'view/layout.php';
     }
-
 }
+
+$_SESSION["ficherosUsuario"]=Fichero::mostrarFichero($_SESSION["usuario"]->getCodUsuario());
+
 
 /**
  * Si el usuario le da al botón de salir,

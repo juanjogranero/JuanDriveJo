@@ -31,4 +31,16 @@ class FicheroPDO
         $sql = "Insert into Ficheros (nombreFichero,tipoDeArchivo,tamanioFichero,compartidoConFichero,puntuacionFichero,usuarioPropietarioFichero) values (?,?,?,?,?,?) ";
         $resultado= DBPDO::ejecutaConsulta($sql,[$nombreFichero, $tipoDeArchivo, $tamanioFichero,$compartidoConFichero,$puntuacionFichero,$usuarioPropietarioFichero]);
     }
+
+    public static function mostrarFichero($usuarioPropietarioFichero){
+        $sql = "Select * from Ficheros where usuarioPropietarioFichero=?";
+        $resultado= DBPDO::ejecutaConsulta($sql,[$usuarioPropietarioFichero]);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() !=0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
 }

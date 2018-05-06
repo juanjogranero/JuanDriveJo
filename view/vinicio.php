@@ -27,21 +27,39 @@
         <form action="core/uploadArchivos.php" class="dropzone"></form>
     </div>';
     } ?>
+</div>
+<div class="container">
+    <?php
+    //Mostrar archivos
+    if (isset($_SESSION["ficherosUsuario"])) {
+        foreach ($_SESSION["ficherosUsuario"] as &$valor) {
+            echo '<a href="' . PATHDIRECTORIOFICHEROSUSUARIOS . $_SESSION["usuario"]->getCodUsuario() . "/archivos/" . $valor["nombreFichero"] . '" download>';
+            echo '<div class="col-sm-2 mostrarFicherosEnlace" style="text-align: center;height: 150px; margin-top: 2%">';
 
-
-    <div class="col-sm-12">
-
-    </div>
-
+            if (substr($valor["tipoDeArchivo"], 0, 5) == "image") {
+                echo "<img src='" . PATHDIRECTORIOFICHEROSUSUARIOS . $_SESSION["usuario"]->getCodUsuario() . "/archivos/" . $valor["nombreFichero"] . "' class='muestraFichero img-rounded'>";
+            } else {
+                echo "<img src='" . PATHIMAGENES . "logo.png' class='muestraFichero img-rounded'>";
+            }
+            echo '<p style="word-wrap: break-word;">' . $valor["nombreFichero"] . '</p>';
+            echo '</div>';
+            echo '</a>';
+        };
+    }else{
+        echo '<div class="col-sm-12" style="text-align: center;">';
+        echo '<span class="glyphicon glyphicon-arrow-up fechaSubida"></span><br>';
+        echo '<h1>Todavía no has subido ningun archivo, prueba a arrastrar un archivo</h1>';
+        echo '</div>';
+    } ?>
 </div>
 
 <p style="visibility: hidden;" id="tamanioPermitido">
-<?php
-if ($_SESSION["usuario"]->getTamanioOcupado() > 0) {
-        echo $_SESSION["usuario"]->getTamanioPermitido()*1024-$_SESSION["usuario"]->getTamanioOcupado();
-}else{
-    echo $_SESSION["usuario"]->getTamanioPermitido()*1024;
-}
-?>
+    <?php
+    if ($_SESSION["usuario"]->getTamanioOcupado() > 0) {
+        echo $_SESSION["usuario"]->getTamanioPermitido() * 1024 - $_SESSION["usuario"]->getTamanioOcupado();
+    } else {
+        echo $_SESSION["usuario"]->getTamanioPermitido() * 1024;
+    }
+    ?>
 </p>
 <script src="webroot/js/subidaArchivosInicio.js"></script>

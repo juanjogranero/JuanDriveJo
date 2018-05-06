@@ -1,12 +1,13 @@
-body{
+body {
     background-color: #f2f2f2;
-    color: rgba(0,0,0,.54);
+    color: rgba(0, 0, 0, .54);
 }
-.img-logo-login{
+
+.img-logo-login {
     width: 100%;
 }
 
-.nav-personalizada{
+.nav-personalizada {
     background-color: #ffffff;
     border-color: #ffffff;
 }
@@ -15,6 +16,7 @@ body{
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -31,7 +33,7 @@ body{
     display: block;
 }
 
-.dropzone{
+.dropzone {
     margin-top: 20px;
     border-color: #337ab7;
     color: #337ab7;
@@ -39,4 +41,30 @@ body{
     background-repeat: repeat-y;
     background-position: right;
     background-size: 100px;
+}
+
+.muestraFichero {
+    width: 50px;
+    height: 50px;
+    -webkit-box-shadow: 2px 2px 5px 4px #337ab7;
+    -moz-box-shadow: 2px 2px 5px 4px #337ab7;
+    box-shadow: 2px 2px 5px 4px #337ab7;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.mostrarFicherosEnlace {
+    box-shadow: 0 0px 0px #337ab7;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.mostrarFicherosEnlace:hover {
+    box-shadow: 0 0px 15px #337ab7;
+}
+
+.fechaSubida {
+    font-size: 50px;
+    background: linear-gradient(#337ab7,rgba(0, 0, 0, .54));
+    -webkit-background-clip: text;
+    color: transparent;
 }

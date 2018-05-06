@@ -81,5 +81,11 @@ class Fichero
         FicheroPDO::subirFichero($nombreFichero,$tipoDeArchivo,  $tamanioFichero, $compartidoConFichero,$puntuacionFichero,$usuarioPropietarioFichero);
     }
 
+    public static function mostrarFichero($usuarioPropietarioFichero)
+    {
+        return FicheroPDO::mostrarFichero($usuarioPropietarioFichero);
+    }
+
+
 
 }
