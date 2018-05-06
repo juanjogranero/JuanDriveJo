@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="col-sm-12">
         <button id="subidaArchivosBoton" <?php if ($_SESSION["usuario"]->getTamanioOcupado() > 0) {
             if ($_SESSION["usuario"]->getTamanioOcupado() / 1024 > $_SESSION["usuario"]->getTamanioPermitido()) {
@@ -19,12 +18,12 @@
 </div></div>';
         } else {
             echo '<div class="col-sm-12">
-        <form action="core/uploadArchivos.php" class="dropzone"></form>
+        <form action="core/uploadArchivos.php" id="formSubida" class="dropzone"></form>
     </div>';
         }
     } else {
         echo '<div class="col-sm-12">
-        <form action="core/uploadArchivos.php" class="dropzone"></form>
+        <form action="core/uploadArchivos.php" id="formSubida" class="dropzone"></form>
     </div>';
     } ?>
 </div>
@@ -42,17 +41,26 @@
                 echo "<img src='" . PATHIMAGENES . "logo.png' class='muestraFichero img-rounded'>";
             }
             echo '<p style="word-wrap: break-word;">' . $valor["nombreFichero"] . '</p>';
+            echo '<p style="word-wrap: break-word;">' . $valor["tamanioFichero"] . ' Kb</p>';
             echo '</div>';
             echo '</a>';
         };
-    }else{
+    }elseif(isset($_POST["busqueda"])){//Si se busca un archivo y no se encuentra entra aqui
         echo '<div class="col-sm-12" style="text-align: center;">';
+        echo '<span class="glyphicon glyphicon-floppy-remove iconoNoEncontrado"></span><br>';
+        echo '<h1>No hemos encontrado ningun resultado </h1>';
+        echo '</div>';
+    }else{//Si no se ha subido ningun archivo sale este mensaje
+        echo '<div class="col-sm-12" style="text-align: left; margin-top: 2%;">';
         echo '<span class="glyphicon glyphicon-arrow-up fechaSubida"></span><br>';
+        echo '</div>';
+        echo '<div class="col-sm-12" style="text-align: center;">';
         echo '<h1>Todavía no has subido ningun archivo, prueba a arrastrar un archivo</h1>';
         echo '</div>';
     } ?>
 </div>
 
+<!--Este parrafo sirve para comprobar desde la libreria de dropzone el tamaño restante permitido para el usuario-->
 <p style="visibility: hidden;" id="tamanioPermitido">
     <?php
     if ($_SESSION["usuario"]->getTamanioOcupado() > 0) {

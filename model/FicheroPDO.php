@@ -22,25 +22,40 @@ class FicheroPDO
      * Funcion a la que se le pasan como parametros el codigo del usuario, la descipcion y el password,
      * se llama al metodo ejecutaConsulta y la realiza.
      *
-     * @param string    $nombreUsuario   Codigo del usuario.
-     * @param string    $descripcion  Descripcion del usuario.
-     * @param string    $password     Contraseña del usuario.
+     * @param string $nombreUsuario Codigo del usuario.
+     * @param string $descripcion Descripcion del usuario.
+     * @param string $password Contraseña del usuario.
      * @return bool         Boolean que controla que se ha ejecutado bien
      */
-    public static function subirFichero($nombreFichero, $tipoDeArchivo, $tamanioFichero,$compartidoConFichero,$puntuacionFichero,$usuarioPropietarioFichero){
+    public static function subirFichero($nombreFichero, $tipoDeArchivo, $tamanioFichero, $compartidoConFichero, $puntuacionFichero, $usuarioPropietarioFichero)
+    {
         $sql = "Insert into Ficheros (nombreFichero,tipoDeArchivo,tamanioFichero,compartidoConFichero,puntuacionFichero,usuarioPropietarioFichero) values (?,?,?,?,?,?) ";
-        $resultado= DBPDO::ejecutaConsulta($sql,[$nombreFichero, $tipoDeArchivo, $tamanioFichero,$compartidoConFichero,$puntuacionFichero,$usuarioPropietarioFichero]);
+        $resultado = DBPDO::ejecutaConsulta($sql, [$nombreFichero, $tipoDeArchivo, $tamanioFichero, $compartidoConFichero, $puntuacionFichero, $usuarioPropietarioFichero]);
     }
 
-    public static function mostrarFichero($usuarioPropietarioFichero){
+    public static function mostrarFichero($usuarioPropietarioFichero)
+    {
         $sql = "Select * from Ficheros where usuarioPropietarioFichero=?";
-        $resultado= DBPDO::ejecutaConsulta($sql,[$usuarioPropietarioFichero]);
+        $resultado = DBPDO::ejecutaConsulta($sql, [$usuarioPropietarioFichero]);
         $resultadoFetch = null;
 
-        if ($resultado->rowCount() !=0) {
+        if ($resultado->rowCount() != 0) {
             $resultadoFetch = $resultado->fetchAll();
         }
         return $resultadoFetch;
     }
+
+    public static function mostrarFicheroBusqueda($usuarioPropietarioFichero, $textoBusqueda)
+    {
+        $sql = "Select * from Ficheros where usuarioPropietarioFichero=? and nombreFichero like ?";
+        $resultado = DBPDO::ejecutaConsulta($sql, [$usuarioPropietarioFichero, '%'.$textoBusqueda.'%']);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
 
 }

@@ -86,6 +86,9 @@ class Fichero
         return FicheroPDO::mostrarFichero($usuarioPropietarioFichero);
     }
 
-
+    public static function mostrarFicheroBusqueda($usuarioPropietarioFichero,$textoBusqueda)
+    {
+        return FicheroPDO::mostrarFicheroBusqueda($usuarioPropietarioFichero, $textoBusqueda);
+    }
 
 }

@@ -64,7 +64,16 @@
             //Boton de salir para cerrar la sesion
             echo "<ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"?pagina=inicio&opcion=salir\"><span class=\"glyphicon glyphicon-off\"></span> Salir</a></li>
-                </ul>";
+                </ul>
+                ";
+            //Barra de busqueda
+                echo'<form class="navbar-form navbar-left" action="?pagina=inicio"  method="post">
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar en tus archivos" name="textoBusqueda">
+                    </div>
+                  <button type="submit" name="busqueda" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                </form>';
+
             if ($_GET['pagina'] != "perfil") {
                 // Icono apra acceder al perfil del usuario
                 echo "<ul class=\"nav navbar-nav navbar-right\">

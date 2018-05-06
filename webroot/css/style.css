@@ -68,3 +68,7 @@ body {
     -webkit-background-clip: text;
     color: transparent;
 }
+
+.iconoNoEncontrado {
+    font-size: 50px;
+}

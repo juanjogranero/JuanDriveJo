@@ -1,6 +1,6 @@
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
+$( document ).ready(function() {
+    $( "#formSubida" ).toggle( "blind", 1 );
 });
 $( "#subidaArchivosBoton" ).click(function() {
-    $( "form" ).toggle( "blind", 500 );
+    $( "#formSubida" ).toggle( "blind", 500 );
 });
