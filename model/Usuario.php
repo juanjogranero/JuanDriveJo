@@ -123,11 +123,11 @@ class Usuario
      * @param string $password Contraseña del usuario
      * @return null|Usuario Objeto de la clase Usuario
      */
-    public static function registrarUsuario($nombreUsuario, $passwordUsuario, $email,$navegadorUtilizado)
+    public static function registrarUsuario($nombreUsuario, $passwordUsuario, $email, $navegadorUtilizado)
     {
         $usuario = null;
-        if (UsuarioPDO::registrarUsuario($nombreUsuario,$passwordUsuario,  $email, $navegadorUtilizado)) {
-            $usuario = self::validarUsuario($nombreUsuario,$passwordUsuario);
+        if (UsuarioPDO::registrarUsuario($nombreUsuario, $passwordUsuario, $email, $navegadorUtilizado)) {
+            $usuario = self::validarUsuario($nombreUsuario, $passwordUsuario);
         }
         return $usuario;
     }
@@ -143,10 +143,10 @@ class Usuario
      * @param string $password Contraseña del usuario.
      * @return bool         Boolean que dice si la consulta se ha ejecutado bien o no.
      */
-    public function editarUsuario($email, $password,$imagenPerfil)
+    public function editarUsuario($email, $password, $imagenPerfil)
     {
         $codUsuario = $this->getCodUsuario();
-        if(UsuarioPDO::editarUsuario($codUsuario,$email, $password,$imagenPerfil)){
+        if (UsuarioPDO::editarUsuario($codUsuario, $email, $password, $imagenPerfil)) {
             $this->setEmail($email);
             $this->setPasswordUsuario($password);
             $this->setImagenPerfil($imagenPerfil);
@@ -182,6 +182,25 @@ class Usuario
     public static function obtenerUsuarioDuplicado($codUsuario)
     {
         return UsuarioPDO::obtenerUsuarioDuplicado($codUsuario);
+    }
+
+    /**
+     * Función obtenerUsuarioDuplicado
+     *
+     * Función que devuelve true si el usuario ya existe.
+     *
+     * @param string $codUsuario Codigo del usuario
+     * @return bool         Boolean que devuelve true si ya existe.
+     */
+    public static function accionFichero($codUsuario, $tamanioArchivo, $accion)
+    {
+        if ($accion == "subirFichero") {
+            UsuarioPDO::subirFichero($codUsuario, $tamanioArchivo);
+            $_SESSION["usuario"]->setTamanioOcupado($_SESSION["usuario"]->getTamanioOcupado()+$tamanioArchivo);
+        } elseif ($accion == "eliminarFichero") {
+            UsuarioPDO::eliminarFichero($codUsuario, $tamanioArchivo);
+            $_SESSION["usuario"]->setTamanioOcupado($_SESSION["usuario"]->getTamanioOcupado()-$tamanioArchivo);
+        }
     }
 
     /**

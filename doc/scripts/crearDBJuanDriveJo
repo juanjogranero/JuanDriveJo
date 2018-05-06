@@ -1,5 +1,6 @@
 create database if not exists DBJuanDriveJo;
 use DBJuanDriveJo;
+ALTER DATABASE DBJuanDriveJo charset=utf8;
 
 create table if not exists Usuarios(
 codUsuario integer primary key AUTO_INCREMENT,
@@ -20,5 +21,6 @@ tipoDeArchivo varchar(100),
 tamanioFichero INTEGER,
 compartidoConFichero varchar(100),
 puntuacionFichero INTEGER ,
-fechaSubidaFichero DATE,
-usuarioPropietarioFichero varchar(255))engine=innodb;
+usuarioPropietarioFichero integer)engine=innodb;
+
+throw new Error("Unknown resizeMethod '" + resizeMethod + "'");

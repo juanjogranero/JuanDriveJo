@@ -17,13 +17,18 @@
         ';
     }
 
-    //Si se van a subir archivos a la pagina principal, se cargan los scripts de la dropzone
+    //Si se van a subir archivos a la pagina principal, se cargan los scripts de la dropzone y de JQueryUI
     if (isset($_GET["pagina"]) && $_GET["pagina"] == "inicio") {
         echo '
             <link href="/webroot/css/dropzone.min.css" type="text/css" rel="stylesheet" />
-            <script src="/webroot/js/dropzone.min.js"></script>
+            <script src="/webroot/js/dropzone.js"></script>
+            <script
+			  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+			  crossorigin="anonymous"></script>
         ';
     }
+
+
     ?>
 
     <link rel="stylesheet" href="webroot/css/style.css" type="text/css">

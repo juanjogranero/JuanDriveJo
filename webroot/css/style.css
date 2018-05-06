@@ -30,3 +30,13 @@ body{
     cursor: inherit;
     display: block;
 }
+
+.dropzone{
+    margin-top: 20px;
+    border-color: #337ab7;
+    color: #337ab7;
+    background-image: url("../media/img/logo.png");
+    background-repeat: repeat-y;
+    background-position: right;
+    background-size: 100px;
+}
