@@ -12,6 +12,15 @@ body {
     border-color: #ffffff;
 }
 
+.nav-personalizada-admin {
+    background-color: #000;
+    border-color: #000;
+}
+
+.nav-personalizada-admin a{
+    color: #fff;
+}
+
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -71,4 +80,7 @@ body {
 
 .iconoNoEncontrado {
     font-size: 50px;
+}
+.iconoPanelAdministracion{
+    font-size: 2em;
 }

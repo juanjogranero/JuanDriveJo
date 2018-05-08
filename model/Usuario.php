@@ -203,6 +203,16 @@ class Usuario
         }
     }
 
+    public static function obtenerDatosAdministracion()
+    {
+        return UsuarioPDO::obtenerDatosAdministracion();
+    }
+
+    public static function obtenerDatosAdministracionNavegadores()
+    {
+        return UsuarioPDO::obtenerDatosAdministracionNavegadores();
+    }
+
     /**
      * @return int
      */

@@ -9,10 +9,10 @@
 
     <?php
     //Si se van a mostrar graficos, se cargan estas librerias de JS
-    if (isset($_GET["pagina"]) && $_GET["pagina"] == "perfil") {
+    if (isset($_GET["pagina"]) && ($_GET["pagina"] == "perfil" || $_GET["pagina"] == "panelAdministracion")) {
         echo '
-            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
         ';
     }
@@ -35,7 +35,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default nav-personalizada">
+<nav class="navbar <?php if (isset($_GET["pagina"])){if($_GET["pagina"]=="panelAdministracion"){echo "navbar-inverse nav-personalizada-admin";}else{echo "navbar-default nav-personalizada";}}?> ">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.php">JuanDriveJo</a>
@@ -45,21 +45,29 @@
         if (isset($_SESSION["usuario"])) {
             //boton para acceder a "Mis archivos"
             echo "<ul class=\"nav navbar-nav\">
-                    <li class=\"active\"><a href=\"?pagina=inicio\">Mis archivos</a></li>
+                    <li";
+            if($_GET["pagina"]=="inicio"){
+                echo " class=\"active\"";
+            }
+            echo "><a href=\"?pagina=inicio\">Mis archivos</a></li>
                   </ul>";
             //boton para acceder al panel de administracion
-            if ($_SESSION["usuario"]->getPerfil()){
+            if ($_SESSION["usuario"]->getPerfil() == "administrador") {
                 echo "<ul class=\"nav navbar-nav\">
-                        <li class=\"active\"><a href=\"?pagina=inicio\">Mis archivos</a></li>
+                        <li";
+                if($_GET["pagina"]=="panelAdministracion"){
+                    echo " class=\"active\"";
+                }
+                echo "><a href=\"?pagina=panelAdministracion\">Panel de administracion</a></li>
                     </ul>";
             }
             //Barra de busqueda
-            echo'<form class="navbar-form navbar-left" action="?pagina=inicio"  method="post">
+            echo '<form class="navbar-form navbar-left" action="?pagina=inicio"  method="post">
                     <div class="form-group">
                     <input type="text" class="form-control" placeholder="Buscar en tus archivos"';
             //si se ha escrito algo antes, se rellena el campo de busqueda
-            if (isset($_POST["textoBusqueda"])){
-                echo 'value="'.$_POST["textoBusqueda"].'"';
+            if (isset($_POST["textoBusqueda"])) {
+                echo 'value="' . $_POST["textoBusqueda"] . '"';
             }
             echo ' name="textoBusqueda">
                     </div>
@@ -87,7 +95,7 @@
                 ";
 
 
-            if ($_GET['pagina'] != "perfil") {
+            if ($_GET['pagina'] != "perfil" || $_GET['pagina'] != "panelAdministracion") {
                 // Icono apra acceder al perfil del usuario
                 echo "<ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"?pagina=perfil\"><img src='" . $_SESSION['usuario']->getImagenPerfil() . "' alt='foto de perfil' class='img-circle' style='width:20px;'> " . $_SESSION['usuario']->getNombreUsuario() . "</a></li>

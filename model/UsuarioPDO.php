@@ -159,9 +159,35 @@ class UsuarioPDO
     {
         $sql = "update Usuarios set tamanioOcupadoUsuario=tamanioOcupadoUsuario-? where codUsuario=?";
 
-        $resultadoConsulta = DBPDO::ejecutaConsulta($sql, [$tamanioArchivo, $codUsuario]);
+        DBPDO::ejecutaConsulta($sql, [$tamanioArchivo, $codUsuario]);
 
     }
+
+    public static function obtenerDatosAdministracion()
+    {
+        $sql = "select count(*) as numUsuarios, sum(tamanioOcupadoUsuario) as tamanioOcupado, sum(tamanioPermitidoUsuario) as tamanioTotalPermitido  from Usuarios";
+        $resultado = DBPDO::ejecutaConsulta($sql, []);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
+    public static function obtenerDatosAdministracionNavegadores()
+    {
+        $sql = "select count(navegadorUtilizado) as cantidad, navegadorUtilizado as nombreNavegador from Usuarios group by navegadorUtilizado";
+        $resultado = DBPDO::ejecutaConsulta($sql, []);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
+
 
 
 }

@@ -10,13 +10,15 @@ $vistas=[
     'inicio'=>'view/vinicio.php',
     'login'=>'view/vlogin.php',
     'registrar'=>'view/vregistrar.php',
-    'perfil'=>'view/vperfil.php'
+    'perfil'=>'view/vperfil.php',
+    'panelAdministracion'=>'view/vpaneladministracion.php'
 ];
 //Controladores disponibles
 $controladores=[
     'inicio'=>'controller/cinicio.php',
     'login'=>'controller/clogin.php',
     'registrar'=>'controller/cregistrar.php',
-    'perfil'=>'controller/cperfil.php'
+    'perfil'=>'controller/cperfil.php',
+    'panelAdministracion'=>'controller/cpaneladministracion.php'
 ];
 ?>
