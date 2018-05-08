@@ -43,9 +43,28 @@
         <?php
         //Si esta logueado el usuario, aparece el menu de "Mis archivos"
         if (isset($_SESSION["usuario"])) {
+            //boton para acceder a "Mis archivos"
             echo "<ul class=\"nav navbar-nav\">
-            <li class=\"active\"><a href=\"?pagina=inicio\">Mis archivos</a></li>
-            </ul>";
+                    <li class=\"active\"><a href=\"?pagina=inicio\">Mis archivos</a></li>
+                  </ul>";
+            //boton para acceder al panel de administracion
+            if ($_SESSION["usuario"]->getPerfil()){
+                echo "<ul class=\"nav navbar-nav\">
+                        <li class=\"active\"><a href=\"?pagina=inicio\">Mis archivos</a></li>
+                    </ul>";
+            }
+            //Barra de busqueda
+            echo'<form class="navbar-form navbar-left" action="?pagina=inicio"  method="post">
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar en tus archivos"';
+            //si se ha escrito algo antes, se rellena el campo de busqueda
+            if (isset($_POST["textoBusqueda"])){
+                echo 'value="'.$_POST["textoBusqueda"].'"';
+            }
+            echo ' name="textoBusqueda">
+                    </div>
+                  <button type="submit" name="busqueda" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                </form>';
         }
         ?>
 
@@ -66,13 +85,7 @@
                 <li><a href=\"?pagina=inicio&opcion=salir\"><span class=\"glyphicon glyphicon-off\"></span> Salir</a></li>
                 </ul>
                 ";
-            //Barra de busqueda
-                echo'<form class="navbar-form navbar-left" action="?pagina=inicio"  method="post">
-                    <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Buscar en tus archivos" name="textoBusqueda">
-                    </div>
-                  <button type="submit" name="busqueda" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>';
+
 
             if ($_GET['pagina'] != "perfil") {
                 // Icono apra acceder al perfil del usuario

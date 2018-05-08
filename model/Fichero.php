@@ -91,4 +91,9 @@ class Fichero
         return FicheroPDO::mostrarFicheroBusqueda($usuarioPropietarioFichero, $textoBusqueda);
     }
 
+    public static function eliminarFichero($usuarioPropietarioFichero,$codFichero)
+    {
+        return FicheroPDO::eliminarFichero($usuarioPropietarioFichero, $codFichero);
+    }
+
 }

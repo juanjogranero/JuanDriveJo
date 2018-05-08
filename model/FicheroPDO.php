@@ -57,5 +57,12 @@ class FicheroPDO
         return $resultadoFetch;
     }
 
+    public static function eliminarFichero($usuarioPropietarioFichero,$codFichero)
+    {
+        $sql = "delete from Ficheros where usuarioPropietarioFichero=? and codFichero = ?";
+        $resultado = DBPDO::ejecutaConsulta($sql, [$usuarioPropietarioFichero,$codFichero]);
+
+    }
+
 
 }
