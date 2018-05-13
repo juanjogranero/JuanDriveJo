@@ -3,6 +3,13 @@
  * Utilidad :
  * Creado por : Juan Jose Granero Omañas
  */
+if(isset($_POST["EliminarCuenta"])){
+    $_SESSION["usuario"]->eliminarUsuario();
+    unset($_SESSION['usuario']);
+    unset($_SESSION["ficherosUsuario"]);
+    session_destroy();
+    header("Location: index.php");
+}
 $entradaOK = true;
 $navegadorUtilizado = '';
 $navegadorUtilizadoNombre = '';

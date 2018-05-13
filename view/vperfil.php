@@ -103,6 +103,7 @@
 
                 <div class="form-group text-center">
                     <input type="submit" class="btn btn-success" name="Aceptar" value="Modificar mis datos">
+                    <input type="submit" class="btn btn-warning" name="EliminarCuenta" value="Eliminar cuenta">
                 </div>
 
             </form>

@@ -97,7 +97,7 @@
                 <hr>
 
                 <div class="form-group text-center">
-                    <input type="submit" class="btn btn-success" name="Aceptar" value="Modificar mis datos">
+                    <input type="submit" class="btn btn-success" name="Aceptar" value="Modificar">
                 </div>
 
             </form>
