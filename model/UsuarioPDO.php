@@ -187,6 +187,31 @@ class UsuarioPDO
         return $resultadoFetch;
     }
 
+    public static function obtenerUsuarios()
+    {
+        $sql = "select * from Usuarios";
+        $resultado = DBPDO::ejecutaConsulta($sql, []);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
+    public static function obtenerUsuarioPorCodigo($codUsuario)
+    {
+        $sql = "select * from Usuarios where codUsuario=?";
+        $resultado = DBPDO::ejecutaConsulta($sql, [obtenerUsuarioPorCodigo]);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
+
+
 
 
 

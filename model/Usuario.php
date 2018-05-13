@@ -213,6 +213,16 @@ class Usuario
         return UsuarioPDO::obtenerDatosAdministracionNavegadores();
     }
 
+    public static function obtenerUsuarios()
+    {
+        return UsuarioPDO::obtenerUsuarios();
+    }
+
+    public static function obtenerUsuarioPorCodigo($codUsuario)
+    {
+        return UsuarioPDO::obtenerUsuarioPorCodigo($codUsuario);
+    }
+
     /**
      * @return int
      */

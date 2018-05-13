@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="text-center">Datos de tu perfil</h1>
+            <h1 class="text-center">Datos </h1>
             <hr>
         </div>
     </div>

@@ -35,7 +35,7 @@
 
 </head>
 <body>
-<nav class="navbar <?php if (isset($_GET["pagina"])){if($_GET["pagina"]=="panelAdministracion"){echo "navbar-inverse nav-personalizada-admin";}else{echo "navbar-default nav-personalizada";}}?> ">
+<nav class="navbar <?php if (isset($_GET["pagina"])){if($_GET["pagina"]=="panelAdministracion" || $_GET["pagina"]=="administrarUsuarios"){echo "navbar-inverse nav-personalizada-admin";}else{echo "navbar-default nav-personalizada";}}?> ">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.php">JuanDriveJo</a>

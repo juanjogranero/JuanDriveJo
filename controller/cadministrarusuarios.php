@@ -9,10 +9,8 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: index.php");
 } else {
     if ($_SESSION['usuario']->getPerfil()=="administrador") {
-        $_SESSION["datosAdministracionUsuarios"]=Usuario::obtenerDatosAdministracion();
-        $_SESSION["datosAdministracionNavegadores"]=Usuario::obtenerDatosAdministracionNavegadores();
-        $_SESSION["datosAdministracionFicheros"]=Fichero::obtenerDatosAdministracion();
-        $_GET['pagina'] = "panelAdministracion";
+        $_SESSION["DatosUsuarios"]=Usuario::obtenerUsuarios();
+        $_GET['pagina'] = "administrarUsuarios";
         require_once 'view/layout.php';
     }
 }

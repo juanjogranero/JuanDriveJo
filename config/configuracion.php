@@ -11,7 +11,9 @@ $vistas=[
     'login'=>'view/vlogin.php',
     'registrar'=>'view/vregistrar.php',
     'perfil'=>'view/vperfil.php',
-    'panelAdministracion'=>'view/vpaneladministracion.php'
+    'panelAdministracion'=>'view/vpaneladministracion.php',
+    'administrarUsuarios'=>'view/vadministrarusuarios.php',
+    'editarUsuarioAdministracion'=>'view/veditarusuarioadministracion.php'
 ];
 //Controladores disponibles
 $controladores=[
@@ -19,6 +21,8 @@ $controladores=[
     'login'=>'controller/clogin.php',
     'registrar'=>'controller/cregistrar.php',
     'perfil'=>'controller/cperfil.php',
-    'panelAdministracion'=>'controller/cpaneladministracion.php'
+    'panelAdministracion'=>'controller/cpaneladministracion.php',
+    'administrarUsuarios'=>'controller/cadministrarusuarios.php',
+    'editarUsuarioAdministracion'=>'controller/ceditarusuarioadministracion.php'
 ];
 ?>

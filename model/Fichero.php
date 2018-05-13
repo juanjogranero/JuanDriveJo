@@ -96,4 +96,9 @@ class Fichero
         return FicheroPDO::eliminarFichero($usuarioPropietarioFichero, $codFichero);
     }
 
+    public static function obtenerDatosAdministracion()
+    {
+        return FicheroPDO::obtenerDatosAdministracion();
+    }
+
 }

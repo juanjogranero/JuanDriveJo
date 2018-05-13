@@ -64,5 +64,16 @@ class FicheroPDO
 
     }
 
+    public static function obtenerDatosAdministracion()
+    {
+        $sql = "select count(*) as cantidadFicheros from Ficheros";
+        $resultado = DBPDO::ejecutaConsulta($sql, []);
+        $resultadoFetch = null;
+
+        if ($resultado->rowCount() != 0) {
+            $resultadoFetch = $resultado->fetchAll();
+        }
+        return $resultadoFetch;
+    }
 
 }
