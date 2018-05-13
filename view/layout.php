@@ -28,6 +28,10 @@
         ';
     }
 
+    //Si se va a editar un usuario desde la administracion, se carga el estilo de bootstrap para los checkbox
+    if (isset($_GET["pagina"]) && $_GET["pagina"] == "editarUsuarioAdministracion") {
+        echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.css">';
+    }
 
     ?>
 
@@ -35,7 +39,7 @@
 
 </head>
 <body>
-<nav class="navbar <?php if (isset($_GET["pagina"])){if($_GET["pagina"]=="panelAdministracion" || $_GET["pagina"]=="administrarUsuarios"){echo "navbar-inverse nav-personalizada-admin";}else{echo "navbar-default nav-personalizada";}}?> ">
+<nav class="navbar <?php if (isset($_GET["pagina"])){if($_GET["pagina"]=="panelAdministracion" || $_GET["pagina"]=="administrarUsuarios" || $_GET["pagina"]=="editarUsuarioAdministracion"){echo "navbar-inverse nav-personalizada-admin";}else{echo "navbar-default nav-personalizada";}}?> ">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.php">JuanDriveJo</a>

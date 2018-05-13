@@ -202,7 +202,7 @@ class UsuarioPDO
     public static function obtenerUsuarioPorCodigo($codUsuario)
     {
         $sql = "select * from Usuarios where codUsuario=?";
-        $resultado = DBPDO::ejecutaConsulta($sql, [obtenerUsuarioPorCodigo]);
+        $resultado = DBPDO::ejecutaConsulta($sql, [$codUsuario]);
         $resultadoFetch = null;
 
         if ($resultado->rowCount() != 0) {
@@ -211,7 +211,16 @@ class UsuarioPDO
         return $resultadoFetch;
     }
 
-
+    public static function editarUsuarioAdministracion($codUsuario,$passwordUsuario,$emailUsuario,$perfilUsuario,$bloqueoUsuario,$imagenPerfilUsuario)
+    {
+        $modificacionOK = false;
+        $sql = "Update Usuarios SET passwordUsuario=?,emailUsuario=?,perfilUsuario=?,bloqueoUsuario=?,imagenPerfilUsuario=? where codUsuario=?";
+        $resultado = DBPDO::ejecutaConsulta($sql, [$passwordUsuario, $emailUsuario, $perfilUsuario, $bloqueoUsuario,$imagenPerfilUsuario,$codUsuario]);
+        if ($resultado->rowCount() == 1) {
+            $modificacionOK = true;
+        }
+        return $modificacionOK;
+    }
 
 
 

@@ -1,46 +1,36 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1 class="text-center">Datos </h1>
+            <h1 class="text-center">Datos de <?php echo $_SESSION["usuarioEditarPorAdministrador"][0]["nombreUsuario"]?></h1>
             <hr>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-2">
-            <?php
-            echo "<img src='" . $_SESSION['usuario']->getImagenPerfil() . "' alt='foto de perfil' class='img-circle' style='width:100%; margin-top:10%;box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.3);'>";
-            ?>
-            <hr>
-            <h4 class="text-center" style="margin-bottom:10%;">
-                <?php
-                echo $_SESSION['usuario']->getNombreUsuario();
-                ?>
-            </h4>
+        <div class="col-sm-3">
 
         </div>
 
-        <div class="col-sm-1">
-
-        </div>
         <div class="col-sm-6">
-            <form action="index.php?pagina=perfil" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <form action="index.php?pagina=editarUsuarioAdministracion" method="post" class="form-horizontal" enctype="multipart/form-data">
                 <label for="codUsuario">Codigo de usuario :</label>
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-floppy-disk"></span>
                     </span>
                     <input type="text" class="form-control"
-                           name="codUsuario" value="<?php echo $_SESSION['usuario']->getCodUsuario(); ?>" disabled>
+                           name="codUsuario" value="<?php echo $_SESSION["usuarioEditarPorAdministrador"][0]["codUsuario"]; ?>" disabled>
                 </div>
 
-                <label for="codUsuario">Tipo de cuenta :</label>
+                <label for="perfilUsuario">Tipo de cuenta :</label>
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-barcode"></span>
                     </span>
-                    <input type="text" class="form-control"
-                           name="codUsuario" value="<?php echo $_SESSION['usuario']->getPerfil(); ?>" disabled>
+                    <select class="form-control" name="perfilUsuario">
+                        <option <?php if($_SESSION["usuarioEditarPorAdministrador"][0]["perfilUsuario"]=="usuario"){echo "selected";}?>>usuario</option>
+                        <option <?php if($_SESSION["usuarioEditarPorAdministrador"][0]["perfilUsuario"]=="administrador"){echo "selected";}?>>administrador</option>
+                    </select>
                 </div>
 
                 <label for="emailUsuario">Correo Electronico :</label>
@@ -52,7 +42,7 @@
                            name="emailUsuario" <?php if (isset($_POST['emailUsuario']) && empty($mensajeError['errorEmailUsuario'])) {
                         echo 'value="', $_POST['emailUsuario'], '"';
                     } else {
-                        echo 'value="', $_SESSION['usuario']->getEmail(), '"';
+                        echo 'value="', $_SESSION["usuarioEditarPorAdministrador"][0]["emailUsuario"], '"';
                     } ?> placeholder="Correo electronico ">
                 </div>
                 <?php if ($mensajeError['errorEmailUsuario'] != "") {
@@ -82,6 +72,11 @@
                     echo "<div class=\"alert alert-danger\">" . $mensajeError['errorDuplicado'] . "</div></br>";
                 } ?>
 
+                <label for="bloqueo">Bloqueo de usuario :</label>
+                <div class="form-group input-group">
+                    <input name="bloqueo" type="checkbox" <?php if($_SESSION["usuarioEditarPorAdministrador"][0]["bloqueoUsuario"]){echo'checked';}?>>
+                </div>
+
                 <label>Cambiar la imagen de perfil :</label>
                 <div class="input-group">
                     <label class="input-group-btn">
@@ -108,61 +103,16 @@
             </form>
 
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-3">
         </div>
 
-        <div class="col-sm-2">
-
-            <img src="<?php echo $navegadorUtilizado; ?>" class='img-circle' alt="Navegador usado"
-                 style='width:100%; margin-top:10%;box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.3);'>
-            <hr>
-            <h4 class="text-center" style="margin-bottom:10%;">
-                <?php
-                echo $navegadorUtilizadoNombre;
-                ?>
-            </h4>
-        </div>
 
     </div>
 
-
-    <div class="row">
-        <div class="col-sm-12">
-            <!--            Grafica generada con morris.js-->
-            <div id='espacioUsuario' style="height: 200px;">
-                <script>
-                    new Morris.Donut({
-                        element: 'espacioUsuario',
-                        data: [
-                            {
-                                label: "Espacio Usado",
-                                value: <?php if ($_SESSION['usuario']->getTamanioOcupado() != 0) {
-                                    echo round($_SESSION['usuario']->getTamanioOcupado() / 1024,2);
-                                } else {
-                                    echo "0";
-                                } ?>},
-                            {
-                                label: "Espacio Libre",
-                                value: <?php if($_SESSION['usuario']->getTamanioOcupado() > 0){
-                                    echo round($_SESSION['usuario']->getTamanioPermitido() - $_SESSION['usuario']->getTamanioOcupado() / 1024,2);
-                                }else{
-                                    echo $_SESSION['usuario']->getTamanioPermitido();
-                                }  ?>}
-                        ],
-                        formatter: function (value, data) {
-                            return value + 'Mb';
-                        },
-                        colors: [
-                            '#2e6da4',
-                            '#5cb85c'
-                        ]
-                    });
-                </script>
-            </div>
-
-        </div>
-    </div>
 
 </div>
-
+<!--Carga de scripts-->
 <script src="webroot/js/modificacionPerfil.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js"></script>
+<script>$("[name='bloqueo']").bootstrapSwitch();</script>

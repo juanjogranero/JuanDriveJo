@@ -1,7 +1,7 @@
 <div class="container colorTextoPanel">
     <?php
     foreach ($_SESSION["DatosUsuarios"] as $valor) {
-        echo '<a href="?pagina=editarUsuarioAdministracion&nombreUsuarioEditarAdmin='.$valor["nombreUsuario"].'" style="color: #c58b4a;">';
+        echo '<a href="?pagina=editarUsuarioAdministracion&codUsuario='.$valor["codUsuario"].'" style="color: #c58b4a;">';
         echo '<div class="row text-center" style="background-color: #fff; margin-bottom: 2%; padding: 2%;word-wrap: break-word; -webkit-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.75);border: 1px solid #c6c6c6;

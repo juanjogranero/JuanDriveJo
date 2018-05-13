@@ -223,6 +223,11 @@ class Usuario
         return UsuarioPDO::obtenerUsuarioPorCodigo($codUsuario);
     }
 
+    public static function editarUsuarioAdministracion($codUsuario,$passwordUsuario,$emailUsuario,$perfilUsuario,$bloqueoUsuario,$imagenPerfilUsuario)
+    {
+        return UsuarioPDO::editarUsuarioAdministracion($codUsuario,$passwordUsuario,$emailUsuario,$perfilUsuario,$bloqueoUsuario,$imagenPerfilUsuario);
+    }
+
     /**
      * @return int
      */
